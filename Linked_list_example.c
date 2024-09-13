@@ -57,6 +57,22 @@ void deleteNode(struct Node** head, int key) {
     free(temp);
 }
 
+void deleteNodebyName(struct Node** head, char* key) {
+    struct Node *temp = *head, *prev;
+    if (temp != NULL && (strcmp(temp->name,key)==0)) {
+        *head = temp->next;
+        free(temp);
+        return;
+    }
+    while (temp != NULL && (strcmp(temp->name,key)!=0)) {
+        prev = temp;
+        temp = temp->next;
+    }
+    if (temp == NULL) return;
+    prev->next = temp->next;
+    free(temp);
+}
+
 void displayList(struct Node* node) {
     printf ("\nhere is the list: \n");
     while (node != NULL) {
@@ -100,7 +116,11 @@ while (1) {
     displayList(head);
 
 }
+
+    // test a few deletions
     deleteNode(&head, 2);
+    deleteNodebyName(&head, "roland");
+
     displayList(head);
 
     return 0;
