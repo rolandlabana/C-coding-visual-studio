@@ -58,7 +58,7 @@ void deleteNode(struct Node** head, int key) {
         prev = temp;
         temp = temp->next;
     }
-    if (temp == NULL) return;
+    if (temp == NULL) { printf ("Delete: No matching age entry"); return;}
     prev->next = temp->next;
     free(temp);
 }
@@ -75,7 +75,7 @@ void deleteNodebyName(struct Node** head, char* key) {
         prev = temp;
         temp = temp->next;
     }
-    if (temp == NULL) return;
+    if (temp == NULL) { printf ("Delete: No matching name entry"); return;}
     prev->next = temp->next;
     free(temp);
 }
