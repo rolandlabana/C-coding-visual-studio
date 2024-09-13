@@ -3,37 +3,37 @@
 #include <string.h>
 
 // Define our node to hold a name and an age
-struct Node {
+struct PersonNode {
     char *name;
-    int data;
-    struct Node* next;
+    int age;
+    struct PersonNode* next;
 };
 
 // Insert a node at the beginning of the list
-void insertAtBeginning(struct Node** head, int newData, char* newName) {
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+void insertAtBeginning(struct PersonNode** head, int newAge, char* newName) {
+    struct PersonNode* newNode = (struct PersonNode*)malloc(sizeof(struct PersonNode));
     newNode->name = newName;
-    newNode->data = newData;
+    newNode->age = newAge;
     newNode->next = (*head);
     (*head) = newNode;
 
     // debug - 
-    //printf("added node: %d,"  "%s\n",newNode->data, newNode->name);
+    //printf("added node: %d,"  "%s\n",newNode->age, newNode->name);
 }
 
 // Insert a node at the end of the list
-void insertAtEnd(struct Node** head, int newData, char* newName) {
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
-    struct Node* last = *head;
+void insertAtEnd(struct PersonNode** head, int newAge, char* newName) {
+    struct PersonNode* newNode = (struct PersonNode*)malloc(sizeof(struct PersonNode));
+    struct PersonNode* last = *head;
 
     newNode->name = malloc(strlen(newName) + 1);
     strcpy(newNode->name, newName); 
     //newNode->name = newName;   // this results in the new name just being a pointer so all names the same as latest
-    newNode->data = newData;
+    newNode->age = newAge;
     newNode->next = NULL;
 
     // debug - 
-    //printf("added node: %d,"  "%s\n",newNode->data, newNode->name);
+    //printf("added node: %d,"  "%s\n",newNode->age, newNode->name);
 
     if (*head == NULL) {
         *head = newNode;
@@ -47,14 +47,14 @@ void insertAtEnd(struct Node** head, int newData, char* newName) {
 }
 
 // Delete a node in the list that matches the given age - only the first match is deleted
-void deleteNode(struct Node** head, int key) {
-    struct Node *temp = *head, *prev;
-    if (temp != NULL && temp->data == key) {
+void deleteNode(struct PersonNode** head, int key) {
+    struct PersonNode *temp = *head, *prev;
+    if (temp != NULL && temp->age == key) {
         *head = temp->next;
         free(temp);
         return;
     }
-    while (temp != NULL && temp->data != key) {
+    while (temp != NULL && temp->age != key) {
         prev = temp;
         temp = temp->next;
     }
@@ -64,8 +64,8 @@ void deleteNode(struct Node** head, int key) {
 }
 
 // Delete a node in the list that matches the given age - only the first match is deleted
-void deleteNodebyName(struct Node** head, char* key) {
-    struct Node *temp = *head, *prev;
+void deleteNodebyName(struct PersonNode** head, char* key) {
+    struct PersonNode *temp = *head, *prev;
     if (temp != NULL && (strcmp(temp->name,key)==0)) {
         *head = temp->next;
         free(temp);
@@ -81,10 +81,10 @@ void deleteNodebyName(struct Node** head, char* key) {
 }
 
 // Display the list starting at the first node
-void displayList(struct Node* node) {
+void displayList(struct PersonNode* node) {
     printf ("\nhere is the list: \n");
     while (node != NULL) {
-        printf("%s, %d -> ", node->name, node->data);
+        printf("%s, %d -> ", node->name, node->age);
         node = node->next;
     }
     printf("NULL\n");
@@ -96,7 +96,7 @@ void displayList(struct Node* node) {
     // Create an integer variable that will store the number we get from the user
     int myNum;
     char name[20]= "";
-    struct Node* head = NULL;
+    struct PersonNode* head = NULL;
 
     printf("Hi, Welcome to Linked List Example in C with ints and strings in a Linked List!\n");
     printf("Enter 'exit' for the name when done.\n");
