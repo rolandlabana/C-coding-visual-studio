@@ -3,7 +3,7 @@
 #include <string.h>
 
 struct Node {
-    char* name;
+    char *name;
     int data;
     struct Node* next;
 };
@@ -20,7 +20,9 @@ void insertAtEnd(struct Node** head, int newData, char* newName) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     struct Node* last = *head;
 
-    newNode->name = newName;
+    newNode->name = malloc(strlen(newName) + 1);
+    strcpy(newNode->name, newName); 
+    //newNode->name = newName;   // this results in the new name just being a pointer so all names the same as latest
     newNode->data = newData;
     newNode->next = NULL;
 
@@ -69,30 +71,37 @@ void displayList(struct Node* node) {
 
 // Create an integer variable that will store the number we get from the user
     int myNum;
-    char name[]= "MYdefault";
+    char name[20]= "";
     struct Node* head = NULL;
 
     printf("Hi, Welcome to Linked List Example in C with ints and strings in a Linked List!\n");
+    printf("Enter 'exit' for the name when done.\n");
 
+while (1) {
     // Ask the user to type a string
     printf("Type a name: ");
-    // Get and save the number the user types
+    // Get and save the number the user type
     scanf("%s", &name);
+
+    if (strcmp(name,"exit") == 0) { break; }
     // Output the name the user typed
     //printf("Your name is: %s\n", name);
 
     // Ask the user to type a number
-    printf("Type a number: ");
+    printf("Enter their age: ");
     // Get and save the number the user types
     scanf("%d", &myNum);
     // Output the number the user typed
     //printf("Your number is: %d\n", myNum);
 
     insertAtEnd(&head, myNum, name);
-    insertAtEnd(&head, 1, "name1");
-    insertAtBeginning(&head, 2, "name2");
+    //insertAtEnd(&head, 1, "name1");
+    //insertAtBeginning(&head, 2, "name2");
     displayList(head);
+
+}
     deleteNode(&head, 2);
     displayList(head);
+
     return 0;
 }
