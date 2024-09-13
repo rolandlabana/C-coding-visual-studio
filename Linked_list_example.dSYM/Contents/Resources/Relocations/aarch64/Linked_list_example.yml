@@ -2,10 +2,10 @@
 triple:          'arm64-apple-darwin'
 binary-path:     '/Users/rolandlabana-iMAC/Documents/C coding visual studio/Linked_list_example'
 relocations:
-  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _insertAtBeginning, symObjAddr: 0x0, symBinAddr: 0x100003BD8, symSize: 0x54 }
-  - { offsetInCU: 0x6E, offset: 0x6E, size: 0x8, addend: 0x0, symName: _insertAtBeginning, symObjAddr: 0x0, symBinAddr: 0x100003BD8, symSize: 0x54 }
-  - { offsetInCU: 0xAE, offset: 0xAE, size: 0x8, addend: 0x0, symName: _insertAtEnd, symObjAddr: 0x54, symBinAddr: 0x100003C2C, symSize: 0xB0 }
-  - { offsetInCU: 0xFC, offset: 0xFC, size: 0x8, addend: 0x0, symName: _deleteNode, symObjAddr: 0x104, symBinAddr: 0x100003CDC, symSize: 0x10C }
-  - { offsetInCU: 0x14A, offset: 0x14A, size: 0x8, addend: 0x0, symName: _displayList, symObjAddr: 0x210, symBinAddr: 0x100003DE8, symSize: 0x70 }
-  - { offsetInCU: 0x16E, offset: 0x16E, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x280, symBinAddr: 0x100003E58, symSize: 0xC4 }
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _insertAtBeginning, symObjAddr: 0x0, symBinAddr: 0x100003B30, symSize: 0x54 }
+  - { offsetInCU: 0x7A, offset: 0x7A, size: 0x8, addend: 0x0, symName: _insertAtBeginning, symObjAddr: 0x0, symBinAddr: 0x100003B30, symSize: 0x54 }
+  - { offsetInCU: 0xBA, offset: 0xBA, size: 0x8, addend: 0x0, symName: _insertAtEnd, symObjAddr: 0x54, symBinAddr: 0x100003B84, symSize: 0xB0 }
+  - { offsetInCU: 0x108, offset: 0x108, size: 0x8, addend: 0x0, symName: _deleteNode, symObjAddr: 0x104, symBinAddr: 0x100003C34, symSize: 0x10C }
+  - { offsetInCU: 0x156, offset: 0x156, size: 0x8, addend: 0x0, symName: _displayList, symObjAddr: 0x210, symBinAddr: 0x100003D40, symSize: 0x70 }
+  - { offsetInCU: 0x17A, offset: 0x17A, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x280, symBinAddr: 0x100003DB0, symSize: 0x138 }
 ...
