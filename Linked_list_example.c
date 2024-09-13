@@ -16,6 +16,9 @@ void insertAtBeginning(struct Node** head, int newData, char* newName) {
     newNode->data = newData;
     newNode->next = (*head);
     (*head) = newNode;
+
+    // debug - 
+    //printf("added node: %d,"  "%s\n",newNode->data, newNode->name);
 }
 
 // Insert a node at the end of the list
