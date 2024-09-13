@@ -2,12 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Define our node to hold a name and an age
 struct Node {
     char *name;
     int data;
     struct Node* next;
 };
 
+// Insert a node at the beginning of the list
 void insertAtBeginning(struct Node** head, int newData, char* newName) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->name = newName;
@@ -16,6 +18,7 @@ void insertAtBeginning(struct Node** head, int newData, char* newName) {
     (*head) = newNode;
 }
 
+// Insert a node at the end of the list
 void insertAtEnd(struct Node** head, int newData, char* newName) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     struct Node* last = *head;
@@ -40,7 +43,7 @@ void insertAtEnd(struct Node** head, int newData, char* newName) {
     last->next = newNode;
 }
 
-
+// Delete a node in the list that matches the given age - only the first match is deleted
 void deleteNode(struct Node** head, int key) {
     struct Node *temp = *head, *prev;
     if (temp != NULL && temp->data == key) {
@@ -57,6 +60,7 @@ void deleteNode(struct Node** head, int key) {
     free(temp);
 }
 
+// Delete a node in the list that matches the given age - only the first match is deleted
 void deleteNodebyName(struct Node** head, char* key) {
     struct Node *temp = *head, *prev;
     if (temp != NULL && (strcmp(temp->name,key)==0)) {
@@ -73,6 +77,7 @@ void deleteNodebyName(struct Node** head, char* key) {
     free(temp);
 }
 
+// Display the list starting at the first node
 void displayList(struct Node* node) {
     printf ("\nhere is the list: \n");
     while (node != NULL) {
@@ -82,7 +87,7 @@ void displayList(struct Node* node) {
     printf("NULL\n");
 }
 
-// *********************************************************************
+// ************** Main *********************
  int main() {
 
 // Create an integer variable that will store the number we get from the user
@@ -92,6 +97,7 @@ void displayList(struct Node* node) {
 
     printf("Hi, Welcome to Linked List Example in C with ints and strings in a Linked List!\n");
     printf("Enter 'exit' for the name when done.\n");
+
 
 while (1) {
     // Ask the user to type a string
