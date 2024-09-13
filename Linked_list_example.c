@@ -90,7 +90,7 @@ void displayList(struct Node* node) {
 // ************** Main *********************
  int main() {
 
-// Create an integer variable that will store the number we get from the user
+    // Create an integer variable that will store the number we get from the user
     int myNum;
     char name[20]= "";
     struct Node* head = NULL;
@@ -98,30 +98,32 @@ void displayList(struct Node* node) {
     printf("Hi, Welcome to Linked List Example in C with ints and strings in a Linked List!\n");
     printf("Enter 'exit' for the name when done.\n");
 
+    // loop and get names and ages until the user enters "exit" for the name
+    while (1) {
+        // Ask the user to type a string
+        printf("Type a name: ");
+        // Get and save the number the user type
+        scanf("%s", &name);
 
-while (1) {
-    // Ask the user to type a string
-    printf("Type a name: ");
-    // Get and save the number the user type
-    scanf("%s", &name);
+        if (strcmp(name,"exit") == 0) { break; }
+        // Output the name the user typed
+        //printf("Your name is: %s\n", name);
 
-    if (strcmp(name,"exit") == 0) { break; }
-    // Output the name the user typed
-    //printf("Your name is: %s\n", name);
+        // Ask the user to type a number
+        printf("Enter their age: ");
+        // Get and save the number the user types
+        scanf("%d", &myNum);
+        // Output the number the user typed
+        //printf("Your number is: %d\n", myNum);
 
-    // Ask the user to type a number
-    printf("Enter their age: ");
-    // Get and save the number the user types
-    scanf("%d", &myNum);
-    // Output the number the user typed
-    //printf("Your number is: %d\n", myNum);
+        insertAtEnd(&head, myNum, name);
+        displayList(head);
 
-    insertAtEnd(&head, myNum, name);
-    //insertAtEnd(&head, 1, "name1");
-    //insertAtBeginning(&head, 2, "name2");
-    displayList(head);
+        // other ways to insert into the list
+        //insertAtEnd(&head, 1, "name1");
+        //insertAtBeginning(&head, 2, "name2");
 
-}
+    }
 
     // test a few deletions
     deleteNode(&head, 2);
