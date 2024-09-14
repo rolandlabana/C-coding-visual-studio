@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include "person_node.h"
 //#include "rol_print_functions.h"
 
 
@@ -11,13 +12,6 @@ void debugPrint(char* msg) {
     if (DEBUG == true) { printf("\nDEBUG: %s", msg); }
 }
 
-// Define our node to hold a name and an age
-struct PersonNode {
-    char *name;
-    int age;
-    struct PersonNode* next;
-    struct PersonNode* prev;
-};
 
 // Insert a node at the beginning of the list
 void insertAtBeginning(struct PersonNode** head, struct PersonNode** tail,  int newAge, char* newName) {
@@ -428,9 +422,9 @@ void printListDiagramVerticalPadding(struct PersonNode* head, struct PersonNode*
         printListDiagramColor(head);
         //displayListReverse(tail);
 
-        // other ways to insert into the list
-        //insertAtEnd(&head, 1, "name1");
-        //insertAtBeginning(&head, 2, "name2");
+                // other ways to insert into the list
+                //insertAtEnd(&head, 1, "name1");
+                //insertAtBeginning(&head, 2, "name2");
 
     }
 
