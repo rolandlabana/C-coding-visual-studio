@@ -7,7 +7,7 @@ int FALSE = 0;
 int DEBUG = 1;  //set to 1 to print debug messages
 
 void debugPrint(char* msg) {
-    if (DEBUG == TRUE) { printf("DEBUG: %s", msg); }
+    if (DEBUG == TRUE) { printf("\nDEBUG: %s", msg); }
 }
 
 // Define our node to hold a name and an age
@@ -33,13 +33,13 @@ void insertAtBeginning(struct PersonNode** head, struct PersonNode** tail,  int 
     // if this is the first node, set tail to this new node
      if (tNode == NULL) {
         (*tail) = newNode;
-        debugPrint("\nfirst node created and linked to beginning\n");
+        debugPrint("first node created and linked to beginning\n");
     }
 
     // if this is not the first node, then set the prev link of the existing first node to the new first node
      if (tNode != NULL) {
         (*head)->prev = newNode;
-        debugPrint("\nadditional node created and linked to beginning\n");
+        debugPrint("additional node created and linked to beginning\n");
     }
 
     // now set head to be the new node since we are adding to the front of the list
@@ -64,7 +64,7 @@ void insertAtEnd(struct PersonNode** head, struct PersonNode** tail, int newAge,
         *head = newNode;
         *tail = newNode;
         newNode->prev = NULL;
-        debugPrint("\nfirst node created and linked to end\n");
+        debugPrint("first node created and linked to end\n");
         return;
     }
     
@@ -72,11 +72,11 @@ void insertAtEnd(struct PersonNode** head, struct PersonNode** tail, int newAge,
     // this is the optimized version as opposed to the commented section below
     // which works but has to traverse the whole list to get to the end instead
     // of just using the tail pointer
-    newNode->prev = (*tail);  // need *?
+    newNode->prev = (*tail); 
     tNode->next = newNode;
     *tail = newNode;
 
-    /* Working but unoptimized insert at end... above is the method to not have to traverse whole list
+    /* Working but unoptimized insert at end below... above is the method to not have to traverse whole list
     //at least one node exists, so link to end of list - can change this
     //so it is more efficient and uses tail instead of taversing the list to the end
     while (last->next != NULL) {
@@ -86,43 +86,105 @@ void insertAtEnd(struct PersonNode** head, struct PersonNode** tail, int newAge,
     newNode->prev = last;
     *tail = newNode;
 */
-
-    debugPrint("\nAdditional node created and linked to end\n");
-
-
+    debugPrint("Additional node created and linked to end\n");
 }
 
 // Delete a node in the list that matches the given age - only the first match is deleted
-void deleteNode(struct PersonNode** head, int key) {
+void deleteNode(struct PersonNode** head, struct PersonNode** tail, int key) {
     struct PersonNode *temp = *head, *prev;
+
+    //check if the first node is the match and delete it
     if (temp != NULL && temp->age == key) {
+        debugPrint("matched first node for deletion by age\n");
         *head = temp->next;
+        //check if this is the only node in the list and if so then make the prev ptr NULL
+        if (temp->next != NULL) {
+            debugPrint("more than one node in the list when delete");
+            temp->next->prev = NULL; 
+        }  else {
+            debugPrint("only one node in list when delete");
+            //update tail since no nodes left in list
+            *tail = NULL;
+        }
         free(temp);
+        debugPrint("removed first node in list by age\n");
         return;
     }
+
+    //go through list and search for matching key
     while (temp != NULL && temp->age != key) {
         prev = temp;
         temp = temp->next;
     }
-    if (temp == NULL) { printf ("Delete: No matching age entry"); return;}
+    
+    //if no match was found, let the user know
+    if (temp == NULL) { printf ("Delete: No matching name entry"); return;}
+
+    //unlink the node and free the memory
+    //handle the case where the last node is the match
+    if (prev->next->next == NULL) {
+        debugPrint("removing the last node\n");
+        printf("%s", prev->next->name);
+        *tail = prev;
+        prev->next = NULL;
+        free(prev->next);
+        debugPrint("removed last node");
+        return;
+    }
+
+    //it's NOT the last node that we are deleting
+    debugPrint("removing a middle node\n");
     prev->next = temp->next;
+    temp->next->prev = prev;
     free(temp);
 }
 
-// Delete a node in the list that matches the given age - only the first match is deleted
-void deleteNodebyName(struct PersonNode** head, char* key) {
+// Delete a node in the list that matches the given name - only the first match is deleted
+void deleteNodebyName(struct PersonNode** head, struct PersonNode** tail, char* key) {
     struct PersonNode *temp = *head, *prev;
+
+    //check if the first node is the match and delete it
     if (temp != NULL && (strcmp(temp->name,key)==0)) {
+        debugPrint("matched first node for deletion by name\n");
         *head = temp->next;
+        //check if this is the only node in the list and if so then make the prev ptr NULL
+        if (temp->next != NULL) {
+            debugPrint("more than one node in the list when delete");
+            temp->next->prev = NULL; 
+        }  else {
+            debugPrint("only one node in list when delete");
+            //update tail since no nodes left in list
+            *tail = NULL;
+        }
         free(temp);
+        debugPrint("removed first node in list by name\n");
         return;
     }
+
+    //go through list and search for matching key
     while (temp != NULL && (strcmp(temp->name,key)!=0)) {
         prev = temp;
         temp = temp->next;
     }
+    
+    //if no match was found, let the user know
     if (temp == NULL) { printf ("Delete: No matching name entry"); return;}
+
+    //unlink the node and free the memory
+    //handle the case where the last node is the match
+    if (prev->next->next == NULL) {
+        debugPrint("removing the last node\n");
+        printf("%s", prev->next->name);
+        *tail = prev;
+        prev->next = NULL;
+        free(prev->next);
+        debugPrint("removed last node");
+        return;
+    }
+    //it's NOT the last node that we are deleting
+    debugPrint("removing a middle node\n");
     prev->next = temp->next;
+    temp->next->prev = prev;
     free(temp);
 }
 
@@ -185,8 +247,8 @@ void displayListReverse(struct PersonNode* node) {
     }
 
     // test a few deletions
-    deleteNode(&head, 2);
-    deleteNodebyName(&head, "roland");
+    deleteNode(&head, &tail, 2);
+    deleteNodebyName(&head, &tail, "roland");
 
     displayList(head);
     displayListReverse(tail);
