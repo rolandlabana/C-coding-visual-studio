@@ -273,6 +273,7 @@ void printListDiagramColor(struct PersonNode* head) {
 #define BOLDBLU "\033[1;34m"
 #define BOLDYEL "\033[1;33m"
 #define BORDER  "\033[1;37m"  // White for borders
+#define REDONYEL "\033[1;31;43m"
 // Function to print the diagram of the doubly linked list with borders and two-way arrows
 void printListDiagramVertical(struct PersonNode* head) {
     struct PersonNode* current = head;
@@ -339,7 +340,9 @@ void printListDiagramVerticalPadding(struct PersonNode* head, struct PersonNode*
     struct PersonNode* current = head;
     const int boxWidth = 25;  // Set a fixed width for the box
     
-    printf(BOLDRED"\nHead: %s\n"RESET, head->name);
+    printf("\n");
+    printf(REDONYEL"Head: %s", head->name, RESET);
+    printf(RESET"\n");
 
     // Iterate through the list and print each node's details
     while (current != NULL) {
@@ -390,8 +393,9 @@ void printListDiagramVerticalPadding(struct PersonNode* head, struct PersonNode*
             printf(BOLDRED"   ↓↑   \n" RESET);  // Two-way arrow for bidirectional links
         }
     }
-    printf(BOLDRED"Tail: %s"RESET, tail->name);
-    printf("\n");
+  
+    printf(REDONYEL"Tail: %s", tail->name, RESET);
+    printf(RESET"\n");
 }
 
 
