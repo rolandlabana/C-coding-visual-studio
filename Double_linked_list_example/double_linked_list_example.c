@@ -68,6 +68,15 @@ void insertAtEnd(struct PersonNode** head, struct PersonNode** tail, int newAge,
         return;
     }
     
+    //at least one node exists, so link the new node to the end of the list
+    // this is the optimized version as opposed to the commented section below
+    // which works but has to traverse the whole list to get to the end instead
+    // of just using the tail pointer
+    newNode->prev = (*tail);  // need *?
+    tNode->next = newNode;
+    *tail = newNode;
+
+    /* Working but unoptimized insert at end... above is the method to not have to traverse whole list
     //at least one node exists, so link to end of list - can change this
     //so it is more efficient and uses tail instead of taversing the list to the end
     while (last->next != NULL) {
@@ -76,7 +85,11 @@ void insertAtEnd(struct PersonNode** head, struct PersonNode** tail, int newAge,
     last->next = newNode;
     newNode->prev = last;
     *tail = newNode;
+*/
+
     debugPrint("\nAdditional node created and linked to end\n");
+
+
 }
 
 // Delete a node in the list that matches the given age - only the first match is deleted
