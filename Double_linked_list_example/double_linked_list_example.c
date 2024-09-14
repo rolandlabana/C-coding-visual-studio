@@ -48,7 +48,6 @@ void insertAtBeginning(struct PersonNode** head, struct PersonNode** tail,  int 
 }
 
 // Insert a node at the end of the list
-//todo - since we now have a double linked list we don't need to traverse the list to get to the end - just use tail
 void insertAtEnd(struct PersonNode** head, struct PersonNode** tail, int newAge, char* newName) {
     struct PersonNode* newNode = (struct PersonNode*)malloc(sizeof(struct PersonNode));
     struct PersonNode* last = *head;
@@ -69,23 +68,10 @@ void insertAtEnd(struct PersonNode** head, struct PersonNode** tail, int newAge,
     }
     
     //at least one node exists, so link the new node to the end of the list
-    // this is the optimized version as opposed to the commented section below
-    // which works but has to traverse the whole list to get to the end instead
-    // of just using the tail pointer
     newNode->prev = (*tail); 
     tNode->next = newNode;
     *tail = newNode;
 
-    /* Working but unoptimized insert at end below... above is the method to not have to traverse whole list
-    //at least one node exists, so link to end of list - can change this
-    //so it is more efficient and uses tail instead of taversing the list to the end
-    while (last->next != NULL) {
-        last = last->next;
-    }
-    last->next = newNode;
-    newNode->prev = last;
-    *tail = newNode;
-*/
     debugPrint("Additional node created and linked to end\n");
 }
 
@@ -118,7 +104,7 @@ void deleteNode(struct PersonNode** head, struct PersonNode** tail, int key) {
     }
     
     //if no match was found, let the user know
-    if (temp == NULL) { printf ("Delete: No matching name entry"); return;}
+    if (temp == NULL) { printf ("Delete: No matching age entry"); return;}
 
     //unlink the node and free the memory
     //handle the case where the last node is the match
@@ -211,7 +197,6 @@ void displayListReverse(struct PersonNode* node) {
 // ************** Main *********************
  int main() {
 
-    // Create an integer variable that will store the number we get from the user
     int myNum;
     char name[20]= "";
     struct PersonNode* head = NULL;
@@ -224,17 +209,13 @@ void displayListReverse(struct PersonNode* node) {
     while (1) {
         // Ask the user to type a string
         printf("\nType a name: ");
-        // Get and save the number the user type
         scanf("%s", &name);
 
         if (strcmp(name,"exit") == 0) { break; }
-        //debugPrint("Your name is: %s\n", name);
 
         // Ask the user to type a number
         printf("Enter their age: ");
-        // Get and save the number the user types
         scanf("%d", &myNum);
-        //debugPrint("Your number is: %d\n", myNum);
 
         insertAtEnd(&head, &tail, myNum, name);
         displayList(head);
