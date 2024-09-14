@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include "rol_print_functions.h"
+//#include "rol_print_functions.h"
 
 
 bool DEBUG = true;  //set to true to print debug messages
@@ -408,7 +408,7 @@ void printListDiagramVerticalPadding(struct PersonNode* head, struct PersonNode*
     struct PersonNode* head = NULL;
     struct PersonNode* tail = NULL;
 
-    print_hello_world(1);
+    //print_hello_world(1);
     printf("Hi, Welcome to Linked List Example in C with ints and strings in a Linked List!\n");
     printf("Enter 'exit' for the name when done.\n");
 
