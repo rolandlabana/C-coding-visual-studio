@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include "rol_print_functions.h"
 
 
 bool DEBUG = true;  //set to true to print debug messages
@@ -327,7 +328,8 @@ void printListDiagramVertical(struct PersonNode* head) {
     printf("\n");
 }
 
-// Function to add padding for right alignment
+
+// ***** Function to add padding for right alignment
 void addPadding(int totalLength, int currentLength) {
     int padding = totalLength - currentLength;
     for (int i = 0; i < padding; i++) {
@@ -335,7 +337,7 @@ void addPadding(int totalLength, int currentLength) {
     }
 }
 
-// Function to print the diagram of the doubly linked list with borders and two-way arrows
+// ****** Function to print the diagram of the doubly linked list with borders and two-way arrows
 void printListDiagramVerticalPadding(struct PersonNode* head, struct PersonNode* tail) {
     struct PersonNode* current = head;
     const int boxWidth = 25;  // Set a fixed width for the box
@@ -398,7 +400,6 @@ void printListDiagramVerticalPadding(struct PersonNode* head, struct PersonNode*
     printf(RESET"\n");
 }
 
-
 // ************** Main *********************
  int main() {
 
@@ -407,6 +408,7 @@ void printListDiagramVerticalPadding(struct PersonNode* head, struct PersonNode*
     struct PersonNode* head = NULL;
     struct PersonNode* tail = NULL;
 
+    print_hello_world(1);
     printf("Hi, Welcome to Linked List Example in C with ints and strings in a Linked List!\n");
     printf("Enter 'exit' for the name when done.\n");
 
