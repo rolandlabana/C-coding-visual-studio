@@ -179,6 +179,7 @@ void deleteNodebyName(struct PersonNode** head, struct PersonNode** tail, char* 
 // Display the list starting at the first node
 void displayList(struct PersonNode* node) {
     printf ("\nhere is the list: \n");
+
     while (node != NULL) {
         printf("%s, %d -> ", node->name, node->age);
         node = node->next;
@@ -196,144 +197,11 @@ void displayListReverse(struct PersonNode* node) {
     printf("NULL\n");
 }
 
-// Function to print the diagram of the doubly linked list
-void printListDiagram(struct PersonNode* head) {
-    struct PersonNode* current = head;
-
-    // Iterate through the list and print each node's details
-    while (current != NULL) {
-        // Print node information
-        printf("[ %s | %d | ", current->name, current->age);
-
-        // Print whether there's a previous node
-        if (current->prev != NULL)
-            printf("prev: %s | ", current->prev->name);
-        else
-            printf("prev: NULL | ");
-
-        // Print whether there's a next node
-        if (current->next != NULL)
-            printf("next: %s ]", current->next->name);
-        else
-            printf("next: NULL ]");
-
-        // Move to the next node
-        current = current->next;
-
-        // If there's a next node, print the link arrow
-        if (current != NULL) {
-            printf(" -> ");
-        }
-    }
-    printf("\n");
-}
-
-// ANSI color codes
-#define RESET   "\033[0m"
-#define BOLDRED "\033[1;31m"
-#define BOLDGRN "\033[1;32m"
-#define BOLDBLU "\033[1;34m"
-#define BOLDYEL "\033[1;33m"
-
-// Function to print the diagram of the doubly linked list with colors
-void printListDiagramColor(struct PersonNode* head) {
-    struct PersonNode* current = head;
-
-    // Iterate through the list and print each node's details
-    while (current != NULL) {
-        // Print node information with color formatting
-        printf(BOLDGRN"[ %s" RESET, current->name);  // Green for name
-        printf(BOLDYEL" | %d" RESET, current->age);  // Yellow for age
-
-        // Print whether there's a previous node
-        if (current->prev != NULL)
-            printf(BOLDBLU" | prev: %s" RESET, current->prev->name);  // Blue for previous link
-        else
-            printf(BOLDBLU" | prev: NULL" RESET);
-
-        // Print whether there's a next node
-        if (current->next != NULL)
-            printf(BOLDBLU" | next: %s ]" RESET, current->next->name);  // Blue for next link
-        else
-            printf(BOLDBLU" | next: NULL ]" RESET);
-
-        // Move to the next node
-        current = current->next;
-
-        // If there's a next node, print the link arrow with color
-        if (current != NULL) {
-            printf(BOLDRED" ↔ " RESET);  // Red for arrow
-        }
-    }
-    printf("\n");
-}
 
 
-// ANSI color codes
-#define RESET   "\033[0m"
-#define BOLDRED "\033[1;31m"
-#define BOLDGRN "\033[1;32m"
-#define BOLDBLU "\033[1;34m"
-#define BOLDYEL "\033[1;33m"
-#define BORDER  "\033[1;37m"  // White for borders
-#define REDONYEL "\033[1;31;43m"
-// Function to print the diagram of the doubly linked list with borders and two-way arrows
-void printListDiagramVertical(struct PersonNode* head) {
-    struct PersonNode* current = head;
-
-    // Iterate through the list and print each node's details
-    while (current != NULL) {
-        // Top border
-        printf(BORDER"+-------------------------+\n" RESET);
-
-        // Print node information with color formatting inside borders
-        printf(BORDER"| " RESET);
-        printf(BOLDGRN"Name: %s" RESET, current->name);
-        int nameLen = strlen(current->name);
-        for (int i = 0; i < 16 - nameLen; i++) printf(" ");  // Padding to align
-        printf(BORDER" |\n" RESET);
-
-        printf(BORDER"| " RESET);
-        printf(BOLDYEL"Age: %d" RESET, current->age);
-        printf("                ");  // Padding for alignment
-        printf(BORDER" |\n" RESET);
-
-        // Print whether there's a previous node
-        printf(BORDER"| " RESET);
-        if (current->prev != NULL)
-            printf(BOLDBLU"Prev: %s" RESET, current->prev->name);
-        else
-            printf(BOLDBLU"Prev: NULL" RESET);
-        printf("        ");  // Padding
-        printf(BORDER" |\n" RESET);
-
-        // Print whether there's a next node
-        printf(BORDER"| " RESET);
-        if (current->next != NULL)
-            printf(BOLDBLU"Next: %s" RESET, current->next->name);
-        else
-            printf(BOLDBLU"Next: NULL" RESET);
-        printf("        ");  // Padding
-        printf(BORDER" |\n" RESET);
-
-        // Bottom border
-        printf(BORDER"+-------------------------+\n" RESET);
-
-        // Move to the next node
-        current = current->next;
-
-        // If there's a next node, print the two-way arrow with color
-        if (current != NULL) {
-            printf(BOLDRED"   ↔   \n" RESET);  // Two-way arrow for bidirectional links
-        }
-    }
-    printf("\n");
-}
-
-
-
-
+// *****************************************
 // ************** Main *********************
+// ******************************************
  int main() {
 
     int myNum;
@@ -341,7 +209,6 @@ void printListDiagramVertical(struct PersonNode* head) {
     struct PersonNode* head = NULL;
     struct PersonNode* tail = NULL;
 
-    //print_hello_world(1);
     printf("Hi, Welcome to Linked List Example in C with ints and strings in a Linked List!\n");
     printf("Enter 'exit' for the name when done.\n");
 

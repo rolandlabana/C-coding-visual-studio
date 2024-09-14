@@ -8,6 +8,9 @@ struct PersonNode;  // this is a forward def of the struct to indicate it's defi
 
 void print_hello_world(int numTimes);
 void printListDiagramVerticalPadding(struct PersonNode* head, struct PersonNode* tail);
+void printListDiagram(struct PersonNode* head);
+void printListDiagramColor(struct PersonNode* head);
+void printListDiagramVertical(struct PersonNode* head);
 
 #endif // ROL_PRINT_FUNCTIONS_H
  
