@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
-int TRUE = 1;
-int FALSE = 0;
-int DEBUG = 1;  //set to 1 to print debug messages
+
+bool DEBUG = true;  //set to true to print debug messages
 
 void debugPrint(char* msg) {
-    if (DEBUG == TRUE) { printf("\nDEBUG: %s", msg); }
+    if (DEBUG == true) { printf("\nDEBUG: %s", msg); }
 }
 
 // Define our node to hold a name and an age
@@ -42,9 +42,8 @@ void insertAtBeginning(struct PersonNode** head, struct PersonNode** tail,  int 
         debugPrint("additional node created and linked to beginning\n");
     }
 
-    // now set head to be the new node since we are adding to the front of the list
+    // set head to be the new node since we are adding to the front of the list
     (*head) = newNode;
-
 }
 
 // Insert a node at the end of the list
@@ -104,7 +103,7 @@ void deleteNode(struct PersonNode** head, struct PersonNode** tail, int key) {
     }
     
     //if no match was found, let the user know
-    if (temp == NULL) { printf ("Delete: No matching age entry"); return;}
+    if (temp == NULL) { printf ("Delete: No matching age entry\n"); return;}
 
     //unlink the node and free the memory
     //handle the case where the last node is the match
@@ -154,7 +153,7 @@ void deleteNodebyName(struct PersonNode** head, struct PersonNode** tail, char* 
     }
     
     //if no match was found, let the user know
-    if (temp == NULL) { printf ("Delete: No matching name entry"); return;}
+    if (temp == NULL) { printf ("Delete: No matching name entry\n"); return;}
 
     //unlink the node and free the memory
     //handle the case where the last node is the match
@@ -194,6 +193,79 @@ void displayListReverse(struct PersonNode* node) {
     printf("NULL\n");
 }
 
+// Function to print the diagram of the doubly linked list
+void printListDiagram(struct PersonNode* head) {
+    struct PersonNode* current = head;
+
+    // Iterate through the list and print each node's details
+    while (current != NULL) {
+        // Print node information
+        printf("[ %s | %d | ", current->name, current->age);
+
+        // Print whether there's a previous node
+        if (current->prev != NULL)
+            printf("prev: %s | ", current->prev->name);
+        else
+            printf("prev: NULL | ");
+
+        // Print whether there's a next node
+        if (current->next != NULL)
+            printf("next: %s ]", current->next->name);
+        else
+            printf("next: NULL ]");
+
+        // Move to the next node
+        current = current->next;
+
+        // If there's a next node, print the link arrow
+        if (current != NULL) {
+            printf(" -> ");
+        }
+    }
+    printf("\n");
+}
+
+// ANSI color codes
+#define RESET   "\033[0m"
+#define BOLDRED "\033[1;31m"
+#define BOLDGRN "\033[1;32m"
+#define BOLDBLU "\033[1;34m"
+#define BOLDYEL "\033[1;33m"
+
+// Function to print the diagram of the doubly linked list with colors
+void printListDiagramColor(struct PersonNode* head) {
+    struct PersonNode* current = head;
+
+    // Iterate through the list and print each node's details
+    while (current != NULL) {
+        // Print node information with color formatting
+        printf(BOLDGRN"[ %s" RESET, current->name);  // Green for name
+        printf(BOLDYEL" | %d" RESET, current->age);  // Yellow for age
+
+        // Print whether there's a previous node
+        if (current->prev != NULL)
+            printf(BOLDBLU" | prev: %s" RESET, current->prev->name);  // Blue for previous link
+        else
+            printf(BOLDBLU" | prev: NULL" RESET);
+
+        // Print whether there's a next node
+        if (current->next != NULL)
+            printf(BOLDBLU" | next: %s ]" RESET, current->next->name);  // Blue for next link
+        else
+            printf(BOLDBLU" | next: NULL ]" RESET);
+
+        // Move to the next node
+        current = current->next;
+
+        // If there's a next node, print the link arrow with color
+        if (current != NULL) {
+            printf(BOLDRED" -> " RESET);  // Red for arrow
+        }
+    }
+    printf("\n");
+}
+
+
 // ************** Main *********************
  int main() {
 
@@ -218,8 +290,8 @@ void displayListReverse(struct PersonNode* node) {
         scanf("%d", &myNum);
 
         insertAtEnd(&head, &tail, myNum, name);
-        displayList(head);
-        displayListReverse(tail);
+        printListDiagramColor(head);
+        //displayListReverse(tail);
 
         // other ways to insert into the list
         //insertAtEnd(&head, 1, "name1");
@@ -231,8 +303,10 @@ void displayListReverse(struct PersonNode* node) {
     deleteNode(&head, &tail, 2);
     deleteNodebyName(&head, &tail, "roland");
 
-    displayList(head);
-    displayListReverse(tail);
+    //displayList(head);
+    //displayListReverse(tail);
+    printListDiagramColor(head);
+    
 
     return 0;
 }
