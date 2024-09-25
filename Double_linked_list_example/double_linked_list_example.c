@@ -1,7 +1,7 @@
 
 // To compile, link, run:
-//     gcc -o ll_prog double_linked_list_example.c rol_print_functions.c
-//     ./ll_prog
+//     gcc -o ll_prog double_linked_list_example.c rol_print_functions.c  // compiles and links the program
+//     ./ll_prog    // executes the program
 //
 //     or create a task or makefile that VS code uses
 //
@@ -14,7 +14,7 @@
 #include "rol_print_functions.h"
 
 
-bool DEBUG = true;  //set to true to print debug messages
+bool DEBUG = false;  //set to true to print debug messages
 
 void debugPrint(char* msg) {
     if (DEBUG == true) { printf("\nDEBUG: %s", msg); }
@@ -187,7 +187,8 @@ void displayList(struct PersonNode* node) {
     printf("NULL\n");
 }
 
-// Display the list starting at the first node
+// Display the list starting at the last node
+//students - do i need this function? why or why not?
 void displayListReverse(struct PersonNode* node) {
     printf ("\nhere is the list in reverse: \n");
     while (node != NULL) {
@@ -235,8 +236,8 @@ void displayListReverse(struct PersonNode* node) {
     }
 
     // test a few deletions
-    deleteNode(&head, &tail, 2);
-    deleteNodebyName(&head, &tail, "roland");
+    //deleteNode(&head, &tail, 2);
+    //deleteNodebyName(&head, &tail, "roland");
 
     //displayList(head);
     //displayListReverse(tail);
